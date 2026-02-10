@@ -1,6 +1,6 @@
 .navbar {
     display: flex;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(24, 31, 42, 0.5);
     backdrop-filter: blur(10px);
     align-items: center;
     position: sticky;
@@ -9,28 +9,29 @@
     min-width: 300px;
     width: 100%;
     margin-inline: auto;
-    padding: 8px 12px;
+    padding: 0px 12px;
     padding-inline: 20px;
     z-index: 10;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 40px;
     font-size: 20px;
     margin: 0;
     padding: 0;
     flex-grow: 1;
     justify-content: center;
-    margin-right: 70px;
+    margin-left: 20px;
+    margin-right: 85px;
 }
 
 .nav-links a {
     text-decoration: none;
-    color: #091e51;
+    color: #EBFAFF;
 }
 
 .nav-links a:hover {
@@ -39,6 +40,6 @@
 }
 
 .logo {
-    width: 70px;
+    width: 65px;
     flex: 0 0 auto;
 }
