@@ -4,11 +4,20 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
 html {
-  background-color: #030A1B;
+  background-color: #213448;
+  overscroll-behavior: none;
 }
 
 #root {
   margin: 0;
-  padding: 12px;
+  padding: 0;
 }
