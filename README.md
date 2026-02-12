@@ -1,16 +1,62 @@
-# React + Vite
+# Movie App (React)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and performant movie exploration app built with React. It lets users discover new titles through advanced search, filtering, and a personalized watchlist.
 
-Currently, two official plugins are available:
+![App Demo](./screenshots/app-demo.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
 
-## React Compiler
+- **Dynamic Exploration:** Real-time title search and genre filtering.
+- **Sorting System:** Sort alphabetically or by rating to find top movies quickly.
+- **Personal Watchlist:** Save favorites in localStorage for persistence between sessions.
+- **Modular Architecture:** Business logic separated from UI via custom hooks and utility functions.
+- **Responsive UI/UX:** Adaptive CSS Grid layout with loading, error, and empty states.
+- **Data Validation:** Automatic checks for data integrity and image availability before rendering.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies Used
 
-## Expanding the ESLint configuration
+- **Core:** React 18+ (Hooks: useState, useEffect, useMemo)
+- **Styling:** Plain CSS with modular structure
+- **Routing:** React Router for navigation between Home and Watchlist pages
+- **Build Tool:** Vite for a fast development environment
+- **Storage:** Browser LocalStorage API for watchlist persistence
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+```plaintext
+src/
+├── components/       # Reusable UI components (Navbar, CardList, MovieCard)
+├── hooks/            # Fetching and state logic (useMovies)
+├── pages/            # Main views: Home and Watchlist
+├── utils/            # Pure functions for filtering, sorting, validation
+├── data/             # Config files (genres, static data)
+└── App.css           # Global styles and main flexbox layout
+```
+
+## Getting Started
+
+### Requirements
+
+- Node.js (LTS)
+- npm
+
+### Steps
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Open the app:
+   - Visit `http://localhost:5173` in your browser.
+
+## License
+
+This project is for educational purposes.
