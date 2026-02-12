@@ -1,9 +1,39 @@
-import React from "react";
-
+import React, { useState } from "react";
 import "./MovieCard.css";
 
 const MovieCard = ({ movie }) => {
+  const [isInWatchlist, setIsInWatchlist] = useState(() => {
+    try {
+      const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      return watchlist.includes(movie.id);
+    } catch (error) {
+      console.error("Error reading watchlist from localStorage", error);
+      return false;
+    }
+  });
   const movieImagePath = `/images/${movie.image}`;
+
+  const toggleWatchlist = (e) => {
+    e.preventDefault();
+
+    try {
+      let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
+      let updatedWatchlist;
+
+      if (isInWatchlist) {
+        updatedWatchlist = watchlist.filter((id) => id !== movie.id);
+      } else {
+        updatedWatchlist = [...watchlist, movie.id];
+      }
+
+      localStorage.setItem("watchlist", JSON.stringify(updatedWatchlist));
+      setIsInWatchlist(!isInWatchlist);
+
+      window.dispatchEvent(new Event("watchlistUpdated"));
+    } catch (error) {
+      console.error("Error updating watchlist", error);
+    }
+  };
 
   return (
     <div className="movie-card">
@@ -16,8 +46,12 @@ const MovieCard = ({ movie }) => {
           <span className="genre">{movie.genre}</span>
           <span className="rating-badge">{movie.rating}</span>
         </div>
-        <button className="watchlist-button">
-          <span className="icon">+</span> Add to Watchlist
+        <button
+          className={`watchlist-button ${isInWatchlist ? "active" : ""}`}
+          onClick={toggleWatchlist}
+        >
+          <span className="icon">{isInWatchlist ? "" : "+"}</span>{" "}
+          {isInWatchlist ? "In Watchlist" : "Add to Watchlist"}
         </button>
       </div>
     </div>
