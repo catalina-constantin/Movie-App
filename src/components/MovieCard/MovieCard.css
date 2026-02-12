@@ -75,6 +75,24 @@
 .watchlist-button:hover {
   background-color: #46657d;
 }
+.watchlist-button.active {
+  background-color: #ebfaff;
+  color: #213448;
+  animation: scaleIn 0.2s ease-out;
+}
+
+.watchlist-button.active:hover {
+  background-color: #cad2d4;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 @media (max-width: 600px) {
   .movie-card {

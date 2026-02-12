@@ -51,7 +51,7 @@ const MovieCard = ({ movie }) => {
           onClick={toggleWatchlist}
         >
           <span className="icon">{isInWatchlist ? "" : "+"}</span>{" "}
-          {isInWatchlist ? "In Watchlist" : "Add to Watchlist"}
+          {isInWatchlist ? "Remove from Watchlist" : "Add to Watchlist"}
         </button>
       </div>
     </div>
