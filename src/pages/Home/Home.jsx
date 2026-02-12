@@ -1,20 +1,22 @@
-import React from 'react';
+import React from "react";
 
-import './Home.css';
-import Navbar from '../../components/Navbar/Navbar';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import CardList from '../../components/CardList/CardList';
-import Footer from '../../components/Footer/Footer';
+import "./Home.css";
+import Navbar from "../../components/Navbar/Navbar";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import CardList from "../../components/CardList/CardList";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
-    return (
-        <>
-            <Navbar />
-            <SearchBar />
-            <CardList />
-            <Footer />
-        </>
-    )
-}
+  return (
+    <div className="page-container">
+      <div className="content-wrap">
+        <Navbar />
+        <SearchBar />
+        <CardList />
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
 export default Home;
