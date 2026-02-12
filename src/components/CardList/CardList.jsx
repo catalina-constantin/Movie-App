@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useMemo } from "react";
 import "./CardList.css";
 import MovieCard from "../MovieCard/MovieCard";
+import StatusMessage from "./StatusMessage";
+import { checkImageExists, filterAndSortMovies } from "../../utils/movieUtils";
 
-function CardList() {
+function CardList({ searchQuery, genreFilter, sortBy }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,52 +13,32 @@ function CardList() {
     const fetchMovies = async () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-
         const response = await fetch("/movies.json");
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
         const data = await response.json();
-        if (!Array.isArray(data)) {
-          throw new Error("Invalid data format: expected an array of movies");
-        }
-
-        const checkImage = (imageName) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.src = `/images/${imageName}`;
-            img.onload = () => resolve(true);
-            img.onerror = () => resolve(false);
-          });
-        };
-
-        const validatedMovies = [];
+        const validated = [];
 
         for (const movie of data) {
-          const hasRequiredFields =
+          if (
             movie.id &&
             movie.title &&
             movie.genre &&
-            movie.rating !== undefined;
-
-          if (hasRequiredFields) {
-            const exists = movie.image ? await checkImage(movie.image) : false;
-
-            validatedMovies.push({
-              id: movie.id,
-              title: movie.title,
-              genre: movie.genre,
-              rating: movie.rating,
+            movie.rating !== undefined
+          ) {
+            const exists = movie.image
+              ? await checkImageExists(movie.image)
+              : false;
+            validated.push({
+              ...movie,
               image: exists ? movie.image : "default.jpg",
             });
           }
         }
-
-        setMovies(validatedMovies);
-      } catch (error) {
-        setError(error.message);
+        setMovies(validated);
+      } catch (err) {
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -65,40 +46,40 @@ function CardList() {
     fetchMovies();
   }, []);
 
-  if (loading) {
+  const processedMovies = useMemo(
+    () => filterAndSortMovies(movies, { searchQuery, genreFilter, sortBy }),
+    [movies, searchQuery, genreFilter, sortBy],
+  );
+
+  if (loading)
     return (
-      <div className="status-container">
+      <StatusMessage>
         <div className="loader"></div>
         <p style={{ fontSize: "1.5rem" }}>Loading movies...</p>
-      </div>
+      </StatusMessage>
     );
-  }
 
-  if (error) {
+  if (error)
     return (
-      <div className="status-container error">
-        <h3 style={{ fontSize: "1.5rem", fontWeight: 500 }}>
+      <StatusMessage type="error">
+        <h3 style={{ fontSize: "1.5rem" }}>
           Ups! An unexpected error occurred.
         </h3>
-        <h4 style={{ fontSize: "1.2rem", fontWeight: 400, marginTop: "10px" }}>
-          Please reload the page and try again.
-        </h4>
-      </div>
+        <p>Please reload the page and try again.</p>
+      </StatusMessage>
     );
-  }
 
-  if (movies.length === 0) {
+  if (processedMovies.length === 0)
     return (
-      <div className="status-container empty">
+      <StatusMessage type="empty">
         <p style={{ fontSize: "1.5rem" }}>No movies found.</p>
-      </div>
+      </StatusMessage>
     );
-  }
 
   return (
     <div className="movies-tray">
       <div className="movies-list">
-        {movies.map((movie) => (
+        {processedMovies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
