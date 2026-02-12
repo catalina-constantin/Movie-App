@@ -1,50 +1,26 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import "./CardList.css";
 import MovieCard from "../MovieCard/MovieCard";
 import StatusMessage from "./StatusMessage";
-import { checkImageExists, filterAndSortMovies } from "../../utils/movieUtils";
+import { filterAndSortMovies } from "../../utils/movieUtils";
+import { useMovies } from "../../hooks/useMovies";
 
-function CardList({ searchQuery, genreFilter, sortBy }) {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function CardList({
+  searchQuery,
+  genreFilter,
+  sortBy,
+  manualMovies,
+  isExternalLoading,
+}) {
+  const {
+    movies: fetchedMovies,
+    loading: internalLoading,
+    error,
+  } = useMovies();
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch("/movies.json");
-        if (!response.ok)
-          throw new Error(`HTTP error! status: ${response.status}`);
-
-        const data = await response.json();
-        const validated = [];
-
-        for (const movie of data) {
-          if (
-            movie.id &&
-            movie.title &&
-            movie.genre &&
-            movie.rating !== undefined
-          ) {
-            const exists = movie.image
-              ? await checkImageExists(movie.image)
-              : false;
-            validated.push({
-              ...movie,
-              image: exists ? movie.image : "default.jpg",
-            });
-          }
-        }
-        setMovies(validated);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchMovies();
-  }, []);
+  const movies = manualMovies || fetchedMovies;
+  const loading =
+    isExternalLoading !== undefined ? isExternalLoading : internalLoading;
 
   const processedMovies = useMemo(
     () => filterAndSortMovies(movies, { searchQuery, genreFilter, sortBy }),
