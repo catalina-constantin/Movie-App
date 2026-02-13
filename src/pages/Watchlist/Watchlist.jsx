@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 
-import "./Watchlist.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import CardList from "../../components/CardList/CardList";
