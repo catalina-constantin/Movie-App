@@ -42,19 +42,25 @@ src/
 
 ### Steps
 
-1. Install dependencies:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/catalina-constantin/Movie-App.git
+```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the dev server:
+3. Start the dev server:
 
    ```bash
    npm run dev
    ```
 
-3. Open the app:
+4. Open the app:
    - Visit `http://localhost:5173` in your browser.
 
 ## License
