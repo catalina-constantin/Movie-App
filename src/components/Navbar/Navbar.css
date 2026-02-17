@@ -29,6 +29,7 @@
 .nav-links a {
   text-decoration: none;
   color: #ebfaff;
+  transition: color 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -36,7 +37,24 @@
   color: #94b4c1;
 }
 
+.nav-links a.active {
+  color: #94b4c1;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
 .logo {
   width: 65px;
   flex: 0 0 auto;
+}
+
+.navbar-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  top: 0px;
+  position: sticky;
+  min-width: 500px;
 }

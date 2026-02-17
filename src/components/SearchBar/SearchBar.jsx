@@ -16,6 +16,8 @@ const SearchBar = ({
       <div className="search-bar">
         <span className="search-icon" aria-hidden="true"></span>
         <input
+          id="search-input"
+          name="search"
           type="text"
           placeholder="Search movies..."
           value={value}
@@ -31,13 +33,15 @@ const SearchBar = ({
         ) : null}
       </div>
       <select
+        id="genre-filter"
+        name="genre"
         className="filter-dropdown"
         value={genreValue}
         onChange={(event) => onGenreChange(event.target.value)}
       >
         {MOVIE_GENRES.map((genre) => (
           <option key={genre.value || genre.label} value={genre.value}>
-            {genre.label}
+            {`Genre: ${genre.label}`}
           </option>
         ))}
       </select>
@@ -46,9 +50,9 @@ const SearchBar = ({
         value={sortValue}
         onChange={(event) => onSortChange(event.target.value)}
       >
-        <option value="">Sort By</option>
-        <option value="rating">Rating</option>
-        <option value="alphabetically">Alphabetically</option>
+        <option value="">Sort by: All</option>
+        <option value="rating">Sort by: Rating</option>
+        <option value="alphabetically">Sort by: Alphabetically</option>
       </select>
     </div>
   );

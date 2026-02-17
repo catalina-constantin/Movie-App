@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
 
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 import CardList from "../../components/CardList/CardList";
 import { useMovies } from "../../hooks/useMovies";
 
@@ -25,20 +23,14 @@ const Watchlist = () => {
   );
 
   return (
-    <div className="page-container">
-      <Navbar />
-      <div className="content-wrap">
-        <CardList
-          manualMovies={watchlistMovies}
-          externalLoading={loading}
-          externalError={error}
-          searchQuery=""
-          genreFilter=""
-          sortBy=""
-        />
-      </div>
-      <Footer />
-    </div>
+    <CardList
+      manualMovies={watchlistMovies}
+      externalLoading={loading}
+      externalError={error}
+      searchQuery=""
+      genreFilter=""
+      sortBy=""
+    />
   );
 };
 

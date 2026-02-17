@@ -1,27 +1,20 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+import logo from "../../assets/logo.svg";
 
 import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        padding: "0 16px",
-        top: "20px",
-        position: "sticky",
-        minWidth: "500px",
-      }}
-    >
+    <div className="navbar-wrapper">
       <nav className="navbar">
-        <img src="src/assets/logo.svg" alt="Movie App Logo" className="logo" />
+        <img src={logo} alt="Movie App Logo" className="logo" />
         <ul id="navlinks" className="nav-links">
           <li>
-            <a href="/">Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <a href="/watchlist">Watchlist</a>
+            <NavLink to="/watchlist">Watchlist</NavLink>
           </li>
         </ul>
       </nav>

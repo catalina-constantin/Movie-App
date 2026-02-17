@@ -1,0 +1,140 @@
+.movie-detail-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: #94b4c1;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.back-button:hover {
+  color: #ebfaff;
+}
+
+.back-arrow {
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-arrow {
+  transform: translateX(-4px);
+}
+
+.movie-detail-page {
+  padding: 0;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+}
+
+.movie-image-wrapper {
+  flex-shrink: 0;
+}
+
+.movie-image-wrapper img {
+  width: 350px;
+  height: auto;
+}
+
+.movie-detail-image {
+  width: 300px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.movie-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.movie-detail-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ebfaff;
+  line-height: 1.2;
+}
+
+.movie-meta {
+  gap: 12px;
+  color: #ebfaff;
+  font-size: 1.05rem;
+}
+
+.meta-badge {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.genre-badge {
+  background-color: #202d38;
+  color: #94b4c1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rating-badge {
+  background-color: #1a3a48;
+  color: #ebfaff;
+  font-weight: 600;
+}
+
+.movie-detail-page .watchlist-button {
+  width: 250px;
+  padding: 12px 32px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .movie-detail-container {
+    padding: 16px;
+  }
+
+  .movie-detail-page {
+    flex-direction: column;
+    gap: 20px;
+    padding: 0;
+  }
+
+  .movie-detail-image {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .movie-detail-title {
+    font-size: 1.5rem;
+  }
+
+  .movie-info-section {
+    align-items: center;
+  }
+}

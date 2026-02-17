@@ -2,6 +2,8 @@ import React, { useMemo } from "react";
 import "./CardList.css";
 import MovieCard from "../MovieCard/MovieCard";
 import StatusMessage from "./StatusMessage";
+import LoadingMessage from "../Loading/LoadingMessage";
+import ErrorMessage from "../Error/ErrorMessage";
 import { filterAndSortMovies } from "../../utils/movieUtils";
 import { useMovies } from "../../hooks/useMovies";
 
@@ -27,23 +29,9 @@ function CardList({
     [movies, searchQuery, genreFilter, sortBy],
   );
 
-  if (loading)
-    return (
-      <StatusMessage>
-        <div className="loader"></div>
-        <p style={{ fontSize: "1.5rem" }}>Loading movies...</p>
-      </StatusMessage>
-    );
+  if (loading) return <LoadingMessage />;
 
-  if (error)
-    return (
-      <StatusMessage type="error">
-        <h3 style={{ fontSize: "1.5rem" }}>
-          Ups! An unexpected error occurred.
-        </h3>
-        <p>Please reload the page and try again.</p>
-      </StatusMessage>
-    );
+  if (error) return <ErrorMessage />;
 
   if (processedMovies.length === 0)
     return (

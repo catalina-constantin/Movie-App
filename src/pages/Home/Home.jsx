@@ -1,35 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
-import Navbar from "../../components/Navbar/Navbar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import CardList from "../../components/CardList/CardList";
-import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [genreFilter, setGenreFilter] = useState("");
-  const [sortBy, setSortBy] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get("search") || ""
+  );
+  const [genreFilter, setGenreFilter] = useState(
+    searchParams.get("genre") || ""
+  );
+  const [sortBy, setSortBy] = useState(searchParams.get("sort") || "");
+
+  useEffect(() => {
+    const params = {};
+    if (searchQuery) params.search = searchQuery;
+    if (genreFilter) params.genre = genreFilter;
+    if (sortBy) params.sort = sortBy;
+
+    setSearchParams(params, { replace: true });
+  }, [searchQuery, genreFilter, sortBy, setSearchParams]);
 
   return (
-    <div className="page-container">
-      <Navbar />
-      <div className="content-wrap">
-        <SearchBar
-          value={searchQuery}
-          onSearchChange={setSearchQuery}
-          genreValue={genreFilter}
-          onGenreChange={setGenreFilter}
-          sortValue={sortBy}
-          onSortChange={setSortBy}
-        />
-        <CardList
-          searchQuery={searchQuery}
-          genreFilter={genreFilter}
-          sortBy={sortBy}
-        />
-      </div>
-      <Footer />
-    </div>
+    <>
+      <SearchBar
+        value={searchQuery}
+        onSearchChange={setSearchQuery}
+        genreValue={genreFilter}
+        onGenreChange={setGenreFilter}
+        sortValue={sortBy}
+        onSortChange={setSortBy}
+      />
+      <CardList
+        searchQuery={searchQuery}
+        genreFilter={genreFilter}
+        sortBy={sortBy}
+      />
+    </>
   );
 };
 

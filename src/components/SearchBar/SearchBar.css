@@ -1,6 +1,6 @@
 .search-container {
   display: flex;
-  padding: 50px 16px 0 16px;
+  padding: 0px 16px 2cqh 16px;
   gap: 10px;
   width: 100%;
   min-width: 500px;
@@ -92,4 +92,19 @@
 .search-bar:focus-within {
   background-color: #46657d;
   transition: background-color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .search-container {
+    flex-wrap: wrap;
+    min-width: unset;
+  }
+
+  .search-bar {
+    flex: 1 1 100%;
+  }
+
+  .filter-dropdown {
+    flex: 1 1 calc(50% - 5px);
+  }
 }
